@@ -45,7 +45,7 @@ jobs:
       - name: Build Csproj
         run: |
           cd loader && dotnet workload restore && cd ..
-          make publish AOT=true OPT=true
+          make publish AOT=true OPT=false
 
       - uses: actions/upload-artifact@v4
         with:

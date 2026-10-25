@@ -2,6 +2,7 @@ import { createState } from "dreamland/core";
 import type { ModuleAPI, MonoConfig, RuntimeAPI } from "../dotnetdefs";
 import { EpxTcpWs } from "../net";
 import { opfsInvalidate } from "../opfs";
+import { fetchResource } from "./resources.js";
 
 const wasm: ModuleAPI = await eval(`import("/_framework/dotnet.js")`);
 const dotnet = wasm.dotnet;
@@ -185,12 +186,12 @@ export async function initDotnet(canvas: HTMLCanvasElement) {
 			},
 		})
 		.withResourceLoader((type: string, _name: string, defaultUri: string) => {
-			if (type !== "dotnetwasm") return null;
-			return fetch(defaultUri, { credentials: "same-origin" }).then(
+			if (type !== "dotnetwasm" && type !== "assembly") return null;
+			return fetchResource(defaultUri, { credentials: "same-origin" }).then(
 				(r) =>
-					new Response(r.body, {
-						headers: { "Content-Type": "application/wasm" },
-					})
+					type === "dotnetwasm" && r.ok
+						? new Response(r.body, { headers: { "Content-Type": "application/wasm" } })
+						: r
 			);
 		})
 		.withEnvironmentVariable("WINK_GL_MAIN", winkGlMain ? "1" : "0")

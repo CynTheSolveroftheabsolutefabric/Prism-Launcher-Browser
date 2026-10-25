@@ -39,6 +39,7 @@ build: ikvmc-bundles
 	cp -r statics/ikvm/image frontend/public/
 	# dotnet messed up
 	sed -i 's/this.appendULeb(32768)/this.appendULeb(65535)/' frontend/public/_framework/dotnet.runtime.*.js
+	python3 split-resources.py
 
 serve: build
 	cd frontend && pnpm dev

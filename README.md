@@ -15,4 +15,11 @@ Supports Minecraft 1.13-26.2 with Fabric 0.19.x (other Fabric versions not teste
 
 NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.
 
-python3 gen-static-libs.py /ikvm/bin/libiava.so:out/native/libiava.a /ikvm/bin/libzip.so:out/native/libzip.a /ikvm/bin/libnio.so:out/native/libnio.a /ikvm/bin/libnet.so:out/native/libnet.a /ikvm/bin/libprefs.so:out/native/libprefs.a /ikvm/bin/libmanagement.so:out/native/libmanagement.a /ikvm/bin/libmanagement_ext.so:out/native/libmanagement_ext.a /ikvm/bin/libjavajpeg.so:out/native/libjavajpeg.a /ikvm/bin/libmlib_image.so:out/native/libmlib_image.a /ikvm/bin/liblcms.so:out/native/liblcms.a /ikvm/bin/libawt.so:out/native/libawt.a /ikvm/bin/libawt_headless.so:out/native/libawt_headless.a /ikvm/bin/libfontmanager.so:out/native/libfontmanager.a /tmp/lwjgl/liblwjgl.so:../native-deps/out/mt/liblwjgl3.a /tmp/lwjgl/libglfw.so:../native-deps/out/mt/libglfw3.a /tmp/lwjgl/liblwjgl_stb.so:../native-deps/out/mt/liblwjgl_stb.a /tmp/lwjgl/libopenal.so:../native-deps/out/mt/liblwjgl_openal.a /tmp/lwjgl/libfreetype.so:out/native/libfreetype.a --rename-symbol /tmp/lwjgl/libglfw.so:emscripten_glfw3_get_proc_address:glfwGetProcAddress --add-alias /tmp/lwjgl/libglfw.so:glfw3 --add-alias /tmp/lwjgl/libglfw.so:/tmp/lwjgl/liblwjgl_opengl.so --add-alias /tmp/lwjgl/libglfw.so:/tmp/lwjgl/libGL.so.1 --add-alias /tmp/lwjgl/liblwjgl.so:/tmp/lwjgl/liblwjgl_tinyfd.so > ../../../ikvmcraft/loader/statics.c
+## building
+
+1. download dotnet 10, a jdk, and potentially also mono. be on linux.
+2. run `sudo dotnet workload restore` in `loader` folder
+3. run `make build` in this folder to build
+4. run `make serve` to serve a DEVELOPMENT version that SHOULD NOT BE HOSTED PUBLICLY.
+5. run `make publish` to build a PRODUCTION version in `frontend/dist` folder.
+

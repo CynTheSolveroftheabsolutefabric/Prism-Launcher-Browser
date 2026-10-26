@@ -4,6 +4,9 @@ import { server as wisp, logging as wispLogging } from "@mercuryworkshop/wisp-js
 import type { IncomingMessage } from "node:http";
 import type { Duplex } from "node:stream";
 
+wisp.options.allow_private_ips = true;
+wisp.options.allow_loopback_ips = true;
+
 // A Wisp server on the dev server itself, at wss://<this origin>/wisp/, so the game's TCP/TLS traffic (epoxy, see
 // src/net.ts) no longer depends on an external proxy. It rides the HTTP server's `upgrade` event; vite's own HMR
 // socket only claims upgrades carrying its protocol header, so the two coexist. This works because `server.proxy`

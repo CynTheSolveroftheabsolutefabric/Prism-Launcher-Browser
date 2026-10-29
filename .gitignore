@@ -10,3 +10,5 @@
 /jars/*
 !/jars/.gitkeep
 /.jvmdg
+
+/cloudflared.log

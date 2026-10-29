@@ -20,7 +20,7 @@
   "dependencies": {
     "@ktibow/iconset-material-symbols": "0.0.1747426012",
     "@mercuryworkshop/epoxy-tls": "3.0.0-alpha.5",
-    "dreamland": "github:mercuryworkshop/dreamlandjs",
+    "dreamland": "file:../vendor/dreamland-0.1.3.tgz",
     "events": "^3.3.0",
     "qr": "^0.7.2",
     "streamx-webstream": "^1.2.12",

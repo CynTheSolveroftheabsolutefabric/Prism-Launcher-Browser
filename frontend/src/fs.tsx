@@ -232,7 +232,7 @@ type Entry = { name: string; entry: FileSystemHandle };
 
 export function OpfsExplorer(
 	this: FC<
-		{ open: boolean },
+		{ open: boolean; start?: string[] },
 		{
 			path: FileSystemDirectoryHandle;
 			components: string[];
@@ -264,13 +264,26 @@ export function OpfsExplorer(
 		this.entries = entries;
 	};
 
+	const openAt = async (segments: string[]) => {
+		let dir = rootFolder;
+		for (const segment of segments) {
+			dir = await dir.getDirectoryHandle(segment, { create: true });
+			opfsInvalidate();
+		}
+		this.editing = null;
+		this.path = dir;
+	};
+
 	this.cx.mount = () => {
 		// reassigning this.path re-runs refresh, so navigation/upload just set this.path = this.path
 		use(this.path).listen(refresh);
 		use(this.open).listen((open) => {
-			if (open) refresh();
+			if (!open) return;
+			if (this.start && this.start.length > 0) void openAt(this.start);
+			else refresh();
 		});
-		refresh();
+		if (this.open && this.start && this.start.length > 0) void openAt(this.start);
+		else refresh();
 	};
 
 	const goUp = async () => {

@@ -1,0 +1,159 @@
+:root {
+	color-scheme: dark;
+
+	--font-body:
+		"Inter", "Adwaita Sans", -apple-system, system-ui, BlinkMacSystemFont,
+		"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	--font-display:
+		"Inter Tight", "Inter", "Adwaita Sans", -apple-system, system-ui,
+		BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	--font-mono:
+		"Adwaita Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo,
+		Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+	--bg: #1b1b1f;
+	--bg-sub: #17171b;
+	--surface0: #141418;
+	--surface1: #202027;
+	--surface2: #26262e;
+	--surface3: #2d2d36;
+	--surface4: #35353f;
+	--surface5: #3e3e49;
+	--surface6: #4a4a56;
+
+	--fg: #f2f2f5;
+	--fg2: #e6e6ea;
+	--fg3: #d7d7dd;
+	--fg4: #c4c4cc;
+	--fg5: #b0b0ba;
+	--fg6: #9a9aa6;
+
+	--text: #f2f2f5;
+	--text-dim: #a4a4b0;
+	--border: #ffffff1f;
+
+	--accent: #4f9cf9;
+	--accent-strong: #3b82f6;
+	--accent-2: #34d399;
+	--loader-bg: #153a20;
+
+	--error: #f87171;
+	--success: #4ade80;
+	--warning: #fbbf24;
+	--info: #93c5fd;
+
+	font-family: var(--font-body);
+	accent-color: var(--accent);
+	scrollbar-color: var(--surface5) transparent;
+}
+
+:root[data-theme="light"] {
+	color-scheme: light;
+
+	--bg: #f3f4f7;
+	--bg-sub: #eceef2;
+	--surface0: #ffffff;
+	--surface1: #ffffff;
+	--surface2: #f6f7f9;
+	--surface3: #eceef2;
+	--surface4: #e2e5ea;
+	--surface5: #d5d9e0;
+	--surface6: #c3c8d1;
+
+	--fg: #16181d;
+	--fg2: #24262d;
+	--fg3: #343741;
+	--fg4: #474b57;
+	--fg5: #5b606d;
+	--fg6: #727885;
+
+	--text: #16181d;
+	--text-dim: #5b606d;
+	--border: #0000001f;
+
+	--accent: #2563eb;
+	--accent-strong: #1d4ed8;
+	--accent-2: #059669;
+}
+
+html,
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background: var(--bg);
+	color: var(--text);
+	font-family: var(--font-body);
+	-webkit-font-smoothing: antialiased;
+}
+
+#app {
+	width: 100%;
+	height: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+	font-family: var(--font-display);
+}
+
+button,
+input,
+select,
+textarea {
+	font-family: inherit;
+}
+
+a {
+	color: var(--accent);
+}
+
+code {
+	font-family: var(--font-mono);
+}
+
+::selection {
+	background: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+::-webkit-scrollbar-thumb {
+	background: var(--surface5);
+	border-radius: 999px;
+	border: 2px solid transparent;
+	background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: var(--surface6);
+	background-clip: content-box;
+}
+
+/* The shared UI primitives were written for the old dark theme; keep them
+   consistent with Prism's flatter surfaces. */
+.component-textfield {
+	border-radius: 0.5rem;
+	background: var(--surface2);
+	border-color: var(--border);
+}
+.component-dialog {
+	background: var(--surface1);
+	border-color: var(--border);
+}

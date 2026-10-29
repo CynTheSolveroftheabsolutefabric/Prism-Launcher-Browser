@@ -8,6 +8,7 @@ export function Dialog(
 	this.cx.mount = () => {
 		const root = this.root as HTMLDialogElement;
 		const update = () => {
+			if (!root.isConnected) return;
 			if (this.open && !root.open) {
 				// Establish the closed styles even when the dialog is created open.
 				root.getBoundingClientRect();

@@ -13,7 +13,8 @@ struct Dll
 
 static partial class IkvmWasm
 {
-    private const string GameDirectoryPath = "/libsdl/minecraft";
+    private const string DefaultGameDirectoryPath = "/libsdl/minecraft";
+    private static string GameDirectoryPath = DefaultGameDirectoryPath;
 
     internal static void Main()
     {
@@ -182,11 +183,21 @@ static partial class IkvmWasm
     }
 
     [JSExport]
-    internal static Task Run(string version, string playerName, string uuid, string accessToken, string userType)
+    internal static Task Run(string version, string playerName, string uuid, string accessToken, string userType, string gameDirectory = null)
     {
         try
         {
-            Console.WriteLine($"[IKVM] running mc {version}");
+            // Prism-style instances get their own game directory (worlds, options.txt,
+            // mods, resource packs). The first instance keeps the legacy path.
+            GameDirectoryPath = string.IsNullOrWhiteSpace(gameDirectory)
+                ? DefaultGameDirectoryPath
+                : gameDirectory;
+            Directory.CreateDirectory(GameDirectoryPath);
+            Directory.SetCurrentDirectory(GameDirectoryPath);
+            AppContext.SetData("user.dir", GameDirectoryPath);
+            java.lang.System.setProperty("user.dir", GameDirectoryPath);
+
+            Console.WriteLine($"[IKVM] running mc {version} in {GameDirectoryPath}");
             ApplyGameOptionOverrides();
 
             MinecraftLauncher.LaunchVanilla(new()

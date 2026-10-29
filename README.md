@@ -1,4 +1,8 @@
-# ikvmcraft
+# Prism Ikvm
+
+This project uses the ikvmcraft source as a base. I just built the launcher
+
+below is the ikvmcraft stuff
 
 Modern Minecraft + drop-in mods loaded dynamically in the browser with mono-wasm and IKVM. Uses a custom fork of IKVM with exact OpenJDK classloading semantics and other wasm patches, as well as a custom fork of mono with a full wasm JIT tier significantly improving performance over interp/jiterp.
 
